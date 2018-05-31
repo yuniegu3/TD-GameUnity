@@ -59,11 +59,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Enemy.cs" />
-    <Compile Include="Assets\Shadow.cs" />
-    <Compile Include="Assets\Turret.cs" />
-    <Compile Include="Assets\WaveSpawner.cs" />
-    <Compile Include="Assets\Waypoints.cs" />
+    <Compile Include="Assets\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Shadow.cs" />
+    <Compile Include="Assets\Scripts\Turret.cs" />
+    <Compile Include="Assets\Scripts\WaveSpawner.cs" />
+    <Compile Include="Assets\Scripts\Waypoints.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>/Users/nycda/Desktop/Tower Defense/Tower Defense/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
