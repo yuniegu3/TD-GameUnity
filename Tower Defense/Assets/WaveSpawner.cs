@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections; //lets you use the function IEnumerator
+using UnityEngine.UI; //lets you use the UI -Text 
 
 public class WaveSpawner : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class WaveSpawner : MonoBehaviour {
 
     public float timeBetweenWaves = 5f; // testing on 5f but change later
     private float countdown = 2f;
+
+    public Text waveCountdownText;
 
     private int waveIndex = 0;
 
@@ -20,6 +23,8 @@ public class WaveSpawner : MonoBehaviour {
             countdown = timeBetweenWaves;
         }
         countdown -= Time.deltaTime; // counts down
+
+        waveCountdownText.text = Mathf.Floor(countdown).ToString(); //Mathf.Floor cuts floats and rounds down to w/e integer
 	}
 
     IEnumerator SpawnWave () //Ienumerator lets you pause this code
