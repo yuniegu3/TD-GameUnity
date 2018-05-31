@@ -34,12 +34,12 @@ public class WaveSpawner : MonoBehaviour {
         for (int i = 0; i < waveIndex; i++)
         {
             SpawnEnemy();
-            yield return new WaitForSeconds(0.5f); //spawns enemiesin .3 secs
+            yield return new WaitForSeconds(0.5f); //spawns enemies in .3 secs so enemies dont come out clumped together from one spot
         }
     }
 
     void SpawnEnemy ()
     {
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation); //starts spawning enemies
     }
 }
