@@ -31,7 +31,7 @@ public class WaveSpawner : MonoBehaviour {
     IEnumerator SpawnWave () //Ienumerator lets you pause this code via yield
     {
         waveIndex++; // enemy count increases by 1 every time a wave is spawned.
-
+        PlayerStats.Rounds++;
         for (int i = 0; i < waveIndex; i++) // for loop that will go on forever. Will need to put a end later. Right now, it will keep going.
         {
             SpawnEnemy(); // so enemies will keep spawning forever because waveindex will always increase.
