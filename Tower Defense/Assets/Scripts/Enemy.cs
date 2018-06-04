@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour {
 
     public int value = 50;
 
+    public GameObject deathEffect;
+
     // target & wavepointIndex is private because you dont want users to be able to play around with that. Since our code relies heavily on this and messing around with this will break my whole code.
     private Transform target; //transform is something in unity. Every object is a transform because it moves/can move.
     private int wavepointIndex = 0;
@@ -30,8 +32,12 @@ public class Enemy : MonoBehaviour {
     }
 
     void Die ()
-    {   
+    {
         PlayerStats.Money += value;
+
+        GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
+
         Destroy(gameObject);
     }
 
