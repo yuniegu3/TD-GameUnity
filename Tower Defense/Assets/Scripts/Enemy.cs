@@ -4,6 +4,10 @@ public class Enemy : MonoBehaviour {
     //speed is float so we can effectively change speed.
     public float speed = 10f;
 
+    public int health = 100;
+
+    public int value = 50;
+
     // target & wavepointIndex is private because you dont want users to be able to play around with that. Since our code relies heavily on this and messing around with this will break my whole code.
     private Transform target; //transform is something in unity. Every object is a transform because it moves/can move.
     private int wavepointIndex = 0;
@@ -14,6 +18,23 @@ public class Enemy : MonoBehaviour {
         target = Waypoints.points[0];// can call waypoints this way b/c its public [0] sets waypoint to first waypoint
         //enemy will look to go to waypoint 0 first at start.
 	}
+
+    public void TakeDamage (int amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die ()
+    {   
+        PlayerStats.Money += value;
+        Destroy(gameObject);
+    }
+
 
     // update is something that changes/updates.
 	private void Update()
@@ -35,11 +56,17 @@ public class Enemy : MonoBehaviour {
     {
         if(wavepointIndex >= Waypoints.points.Length -1)//if wavepoint is at the end (waypoint is a array as defined in Waypoints.cs script)
         {
-            Destroy(gameObject); //destroys the enemy gameobject if wavepoint is at the end - by gameObject = enemy/target/the blue ball.
+            EndPath(); //destroys the enemy gameobject if wavepoint is at the end - by gameObject = enemy/target/the blue ball.
             return; //Destroy takes some time to destroy object so it might switch over to next code if not returned. This will make game glitchy
         }
+
         wavepointIndex++; // index is increased, that way, enemies are moving to the next waypoint after reaching a waypoint if the waypoint is not at end.
         target = Waypoints.points[wavepointIndex];//switches to the next waypoint(target switches)
     }
-    
+
+    void EndPath ()
+    {
+        PlayerStats.Lives--;
+        Destroy(gameObject);
+    }
 }

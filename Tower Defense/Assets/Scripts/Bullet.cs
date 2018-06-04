@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
 
     public float speed = 30f;
 
+    public int damage = 50;
+
     public GameObject impactEffect; //this is the cool bullet impact effect ive made from unity (particles object)
 
     public void Chase (Transform _target)
@@ -31,16 +33,31 @@ public class Bullet : MonoBehaviour {
         }
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(target);
 
 	}
 
     void HitTarget ()
     {
         GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(effectIns, 2f); // after 2f, effectIns(particles object) is destroyed.
+        Destroy(effectIns, 5f); // after 2f, effectIns(particles object) is destroyed.
 
-        Destroy(target.gameObject); // enemy/target is destroyed
+        Damage(target);
+
         Destroy(gameObject); // bullet is destroyed.
 
     }
+
+    void Damage (Transform enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+
+        if (e != null)
+        {
+            e.TakeDamage(damage);
+        }
+    }
+
+
+
 }

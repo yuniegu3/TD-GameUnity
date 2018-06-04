@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI; //lets you use the UI -Text 
 
 public class BuildManager : MonoBehaviour
 {
@@ -17,16 +18,36 @@ public class BuildManager : MonoBehaviour
     }
 
     public GameObject standardTurretPrefab;
-    public GameObject anotherTurretPrefab;
+    public GameObject buildEffect;
 
-    private GameObject turretToBuild;
+    private TurretBlueprint turretToBuild;
 
-    public GameObject GetTurretToBuild()
+    public Text moneyText;
+
+    public bool CanBuild { get { return turretToBuild != null; }  } //propery (can never be set, this is checking if turret is not null, giving true or false)
+    public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.cost; }  } 
+
+    public void BuildTurretOn(Node node)
     {
-        return turretToBuild;
+        if (PlayerStats.Money < turretToBuild.cost)
+        {
+            Debug.Log("Not enough money to build");
+            return;
+        }
+
+        PlayerStats.Money -= turretToBuild.cost;
+       
+        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        node.turret = turret;
+
+        GameObject effect = (GameObject)Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
+
+        Debug.Log("Turret Built! Money left: " + PlayerStats.Money);
+        moneyText.text = ("$" + PlayerStats.Money).ToString();
     }
 
-    public void SetTurretToBuild (GameObject turret)
+    public void SelectTurretToBuild (TurretBlueprint turret)
     {
         turretToBuild = turret;
     }
