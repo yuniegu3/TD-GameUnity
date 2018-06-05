@@ -5,10 +5,12 @@ public class MainMenu : MonoBehaviour {
 
     public string levelToLoad = "MainLevel";
 
-	public void Play ()
-	{
-        SceneManager.LoadScene(levelToLoad);
-	}
+    public SceneFader sceneFader;
+
+    public void Play()
+    {
+        sceneFader.FadeTo(levelToLoad);
+    }
 
 	public void Quit()
 	{

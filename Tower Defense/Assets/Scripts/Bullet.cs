@@ -40,14 +40,12 @@ public class Bullet : MonoBehaviour {
     void HitTarget ()
     {
         GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(effectIns, 5f); // after 2f, effectIns(particles object) is destroyed.
+        Destroy(effectIns, 5f); // after 5f, effectIns(particles object) is destroyed.
 
         Damage(target);
 
         Destroy(gameObject); // bullet is destroyed.
-
         return;
-
     }
 
     void Damage (Transform enemy)
@@ -58,6 +56,7 @@ public class Bullet : MonoBehaviour {
         {
             e.TakeDamage(damage);
         }
+
     }
 
 

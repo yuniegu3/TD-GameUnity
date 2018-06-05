@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour {
     public float speed = 10f;
 
     public float startHealth = 100;
+    public static float StartHP;
     private float health;
 
     public int value = 50;
@@ -22,29 +23,32 @@ public class Enemy : MonoBehaviour {
     // starts moving enemies(target)!
 	void Start()
 	{
+        health = StartHP;
         target = Waypoints.points[0];// can call waypoints this way b/c its public [0] sets waypoint to first waypoint
         //enemy will look to go to waypoint 0 first at start.
 	}
 
     public void TakeDamage (float amount)
     {
-        
         health -= amount;
-
-        healthBar.fillAmount = health / startHealth;
+        healthBar.fillAmount = health / StartHP;
 
         if (health <= 0)
         {
             Die();
         }
+        return;
     }
 
     void Die ()
     {
+
         PlayerStats.Money += value;
 
         GameObject effect = (GameObject)Instantiate(enemyDeathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
+
+        WaveSpawner.EnemiesAlive--;
 
         Destroy(gameObject);
     }
@@ -78,9 +82,10 @@ public class Enemy : MonoBehaviour {
         target = Waypoints.points[wavepointIndex];//switches to the next waypoint(target switches)
     }
 
-    void EndPath ()
+    void EndPath()
     {
         PlayerStats.Lives--;
+        WaveSpawner.EnemiesAlive--;
         Destroy(gameObject);
     }
 }
