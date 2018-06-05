@@ -1,6 +1,6 @@
 WebGL
 PlayerPath?
-/Users/nycda/Desktop/Tower Defense/Tower Defense/TowerDefenceWebGL
+/Users/nycda/Desktop/Tower Defense/TowerDefenceWebGL
 SceneListBegin?
 Assets/Scenes/mainMenu.unity
 Assets/Scenes/MainLevel.unity
