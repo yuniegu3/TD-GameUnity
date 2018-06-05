@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
     //speed is float so we can effectively change speed.
     public float speed = 10f;
 
-    public int health = 100;
+    public float startHealth = 100;
+    private float health;
 
     public int value = 50;
 
-    public GameObject deathEffect;
+    public GameObject enemyDeathEffect;
+
+    [Header("Unity Stuff")]
+    public Image healthBar;
 
     // target & wavepointIndex is private because you dont want users to be able to play around with that. Since our code relies heavily on this and messing around with this will break my whole code.
     private Transform target; //transform is something in unity. Every object is a transform because it moves/can move.
@@ -21,9 +26,12 @@ public class Enemy : MonoBehaviour {
         //enemy will look to go to waypoint 0 first at start.
 	}
 
-    public void TakeDamage (int amount)
+    public void TakeDamage (float amount)
     {
+        
         health -= amount;
+
+        healthBar.fillAmount = health / startHealth;
 
         if (health <= 0)
         {
@@ -35,7 +43,7 @@ public class Enemy : MonoBehaviour {
     {
         PlayerStats.Money += value;
 
-        GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+        GameObject effect = (GameObject)Instantiate(enemyDeathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
 
         Destroy(gameObject);

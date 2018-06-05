@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour {
 
     public float speed = 30f;
 
-    public int damage = 50;
+    public float damage = 50f;
 
     public GameObject impactEffect; //this is the cool bullet impact effect ive made from unity (particles object)
 
@@ -45,6 +45,8 @@ public class Bullet : MonoBehaviour {
         Damage(target);
 
         Destroy(gameObject); // bullet is destroyed.
+
+        return;
 
     }
 

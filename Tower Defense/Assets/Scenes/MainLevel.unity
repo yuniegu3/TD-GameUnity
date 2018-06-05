@@ -10845,6 +10845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bef952c280ad4c1e83a86a68f96e3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuSceneName: mainMenu
   roundsText: {fileID: 1237160696}
 --- !u!1 &1094984739
 GameObject:
@@ -10949,7 +10950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 1597179999}
-  menuSceneName: MainMenu
+  menuSceneName: mainMenu
 --- !u!1001 &1106995359
 Prefab:
   m_ObjectHideFlags: 0
@@ -14641,7 +14642,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1431072484}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1094984745}
+        m_MethodName: Menu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1431072484
@@ -18678,8 +18690,8 @@ MonoBehaviour:
   m_Spacing: 5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
 --- !u!1001 &1838910806
 Prefab:
   m_ObjectHideFlags: 0

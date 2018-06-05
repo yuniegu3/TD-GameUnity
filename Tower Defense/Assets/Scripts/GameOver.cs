@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement; //reloads Scene
 
 
 public class GameOver : MonoBehaviour {
-
+    
+    public string menuSceneName = "mainMenu";
     public Text roundsText;
 
 	private void OnEnable()
@@ -19,7 +20,7 @@ public class GameOver : MonoBehaviour {
 
     public void Menu ()
     {
-        Debug.Log("Go to Menu");
+        SceneManager.LoadScene("mainMenu");
     }
 
 }
