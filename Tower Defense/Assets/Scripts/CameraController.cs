@@ -2,7 +2,7 @@
 
 public class CameraController : MonoBehaviour {
 
-    private bool doMovement = true;
+
     public float panSpeed = 30f;
     public float panBorderTickness = 10f;
 
@@ -20,11 +20,6 @@ public class CameraController : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-            doMovement = !doMovement;
-        
-        if (!doMovement)
-            return;
         //postMVP have a limit set to how far you can move
 
         if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderTickness)   

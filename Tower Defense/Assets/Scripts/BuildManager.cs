@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.UI; //lets you use the UI -Text 
+// using UnityEngine.UI; //lets you use the UI -Text 
 
 public class BuildManager : MonoBehaviour
 {
     // a way to build one buildmanager and share it 
     public static BuildManager instance;
 
-    private void Awake()
+    void Awake()
     {
         if (instance != null)
         {
-            Debug.LogError("More then one builfmanager is in scene!");
+            Debug.LogError("More then one buildmanager is in scene!");
             return;
         }
         instance = this; // this says this buildmanager is going to be put into instance variable.
@@ -19,37 +19,47 @@ public class BuildManager : MonoBehaviour
 
     public GameObject standardTurretPrefab;
     public GameObject buildEffect;
+    public GameObject sellEffect;
 
     private TurretBlueprint turretToBuild;
+    private Node selectedNode;
 
-    public Text moneyText;
+    public NodeUI nodeUI;
 
     public bool CanBuild { get { return turretToBuild != null; }  } //propery (can never be set, this is checking if turret is not null, giving true or false)
     public bool HasMoney { get { return PlayerStats.Money >= turretToBuild.cost; }  } 
 
-    public void BuildTurretOn(Node node)
+   
+    public void SelectNode (Node node)
     {
-        if (PlayerStats.Money < turretToBuild.cost)
+        if (selectedNode == node)
         {
-            Debug.Log("Not enough money to build");
+            DeselectNode();
             return;
         }
 
-        PlayerStats.Money -= turretToBuild.cost;
-       
-        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
-        node.turret = turret;
+        selectedNode = node;
+        turretToBuild = null;
 
-        GameObject effect = (GameObject)Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);
-        Destroy(effect, 5f);
-
-        Debug.Log("Turret Built! Money left: " + PlayerStats.Money);
-        moneyText.text = ("$" + PlayerStats.Money).ToString();
+        nodeUI.SetTarget(node);
     }
 
-    public void SelectTurretToBuild (TurretBlueprint turret)
+    public void DeselectNode()
+    {
+        selectedNode = null;
+        nodeUI.Hide();
+    }
+
+
+    public void SelectTurretToBuild(TurretBlueprint turret)
     {
         turretToBuild = turret;
+        DeselectNode();
+    }
+
+    public TurretBlueprint GetTurretToBuild()
+    {
+        return turretToBuild;
     }
 }
 

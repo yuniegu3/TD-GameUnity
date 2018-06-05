@@ -1,10 +1,18 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-    [System.Serializable] // this will allow this item to show in inspector.
-public class TurretBlueprint {
+[System.Serializable]
+public class TurretBlueprint
+{
 
     public GameObject prefab;
     public int cost;
 
+    public GameObject upgradedPrefab;
+    public int upgradeCost;
+
+    public int GetSellAmount()
+    {
+        return cost / 2;
+    }
 }
